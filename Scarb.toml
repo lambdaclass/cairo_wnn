@@ -1,0 +1,11 @@
+[package]
+name = "cairo_wnn"
+version = "0.1.0"
+description = "A minimal template for developing with Cairo 1.0"
+
+[scripts]
+sierra = "cairo-compile . -r"
+test = "cairo-test ."
+cairo = "cairo-run main.cairo"
+
+# [dependencies]
