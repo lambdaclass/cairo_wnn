@@ -1,7 +1,7 @@
 use array::ArrayTrait;
 
-fn main() {
-    let mut input = ArrayTrait::new();
+fn load_input() -> Array<u64>{
+    let mut input = ArrayTrait::<u64>::new();
     //from input.txt file
     input.append(50370230_u64);
     input.append(143539980_u64);
@@ -59,4 +59,5 @@ fn main() {
     input.append(46209532_u64);
     input.append(240695356_u64);
     input.append(228577274_u64);
+    input
 }
