@@ -1,6 +1,6 @@
 use array::ArrayTrait;
 
-fn load_input() -> Array<u64>{
+fn load_input() -> Array<u64> {
     let mut input = ArrayTrait::<u64>::new();
     //from input.txt file
     input.append(50370230_u64);
