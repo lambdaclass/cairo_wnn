@@ -9,12 +9,12 @@ struct Discriminators {
 
 trait DiscriminatorsTrait {
     // Returns the discriminator class
-    fn predict(self: @Discriminators, input: @Array<u64>) -> u64;
+    fn predict(self: @Discriminators, input: @Array<u64>) -> u32;
 }
 
 impl DiscriminatorsTraitImpl of DiscriminatorsTrait {
     // Predicting consist of iterating each discriminator and checking the membership of the input and then summing all the values
-    fn predict(self: @Discriminators, input: @Array<u64>) -> u64 {
+    fn predict(self: @Discriminators, input: @Array<u64>) -> u32 {
         let mut counter_input: u32 = 0;
         let mut counter_discriminator: u32 = 0;
         let mut sum: u64 = 0;
@@ -41,8 +41,7 @@ impl DiscriminatorsTraitImpl of DiscriminatorsTrait {
                 sum = 0;
             }
             counter_discriminator += 1;
-        };
-        sum
+        }
     }
 }
 
