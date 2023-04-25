@@ -18,8 +18,8 @@ struct HashValue {
 
 trait HashValueTrait {
     fn validate_hash(self: @HashValue, input: u64) -> bool;
+    fn validate_bit_decomposition(self: @HashValue) -> bool;
 }
-
 
 impl HashValueTraitImpl of HashValueTrait {
     fn validate_hash(self: @HashValue, input: u64) -> bool {
@@ -27,6 +27,13 @@ impl HashValueTraitImpl of HashValueTrait {
         let x3 = inputf252 * inputf252 * inputf252;
         let aux = *self.quotient * 2097143_felt252 + *self.hash;
         return x3 == aux;
+    }
+
+    fn validate_bit_decomposition(self: @HashValue) -> bool {
+        //ToDo check if the hash length
+        let x = *self.decomposition.msb * 1024_felt252 + *self.decomposition.index2;
+        let x = x * 1024_felt252 + *self.decomposition.index1;
+        return x == *self.hash;
     }
 }
 

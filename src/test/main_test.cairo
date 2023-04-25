@@ -27,7 +27,7 @@ fn _validate_all_hash(input: @Array<u64>, hash_values: @Array<HashValue>, index:
     return _validate_all_hash(input, hash_values, index + 1);
 }
 
-fn validate_all_hash(input: @Array<u64>, hash_values: @Array<HashValue>) -> bool {
+fn validate_all_hash_value(input: @Array<u64>, hash_values: @Array<HashValue>) -> bool {
     assert(input.len() == hash_values.len(), 'should be the same length');
     _validate_all_hash(input, hash_values, 0)
 }
@@ -37,11 +37,11 @@ fn validate_all_hash(input: @Array<u64>, hash_values: @Array<HashValue>) -> bool
 fn integration_test() {
     let hash_values = load_hash_values();
     let input = load_input();
-    assert(validate_all_hash(@input, @hash_values) == true, 'should be true');
+    assert(validate_all_hash_value(@input, @hash_values) == true, 'should be true');
 }
 
 #[test]
-fn test_validate() {
+fn test_validate_hash_value() {
     let mut hash_values = ArrayTrait::new();
     hash_values.append(
         HashValue {
@@ -58,5 +58,14 @@ fn test_validate() {
     let hash_value: HashValue = *hash_values.get(0).unwrap().unbox();
     let input_i = *input.get(0).unwrap().unbox();
     let validation = hash_value.validate_hash(input_i);
+    assert(validation == true, 'should be true');
+}
+
+#[test]
+fn test_validate_hash_bit_composition() {
+    let hash_values = load_hash_values();
+
+    let hash_value: HashValue = *hash_values.get(0).unwrap().unbox();
+    let validation = hash_value.validate_bit_decomposition();
     assert(validation == true, 'should be true');
 }
