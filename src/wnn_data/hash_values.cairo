@@ -1,4 +1,6 @@
 use array::ArrayTrait;
+use traits::TryInto;
+use traits::Into;
 
 #[derive(Copy, Drop)]
 struct Decomposition {
@@ -12,6 +14,20 @@ struct HashValue {
     hash: felt252,
     quotient: felt252,
     decomposition: Decomposition,
+}
+
+trait HashValueTrait {
+    fn validate_hash(self: @HashValue, input: u64) -> bool;
+}
+
+
+impl HashValueTraitImpl of HashValueTrait {
+    fn validate_hash(self: @HashValue, input: u64) -> bool {
+        let inputf252 = input.into();
+        let x3 = inputf252 * inputf252 * inputf252;
+        let aux = *self.quotient * 2097143_felt252 + *self.hash;
+        return x3 == aux;
+    }
 }
 
 fn load_hash_values() -> Array<HashValue> {
@@ -510,3 +526,4 @@ fn load_hash_values() -> Array<HashValue> {
     );
     hash_values
 }
+

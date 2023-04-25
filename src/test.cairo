@@ -1,4 +1,3 @@
-// Cairo files in folders can only be imported from a file of the same name as the folder
-
 mod math_test;
 mod wnn_data_test;
+mod main_test;
