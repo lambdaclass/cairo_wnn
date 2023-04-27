@@ -18,9 +18,14 @@ fn _validate_all_hash(input: @Array<u64>, hash_values: @Array<HashValue>, index:
 
     let hash_value: HashValue = *hash_values.get(index).unwrap().unbox();
     let input_i = *input.get(index).unwrap().unbox();
-    let result = hash_value.validate_hash(input_i);
+    let validate_hash_result = hash_value.validate_hash(input_i);
+    let decomposition_result = hash_value.validate_bit_decomposition();
 
-    if result == false {
+    // Refactor after boolean operations
+    if validate_hash_result == false {
+        return false;
+    }
+    if decomposition_result == false {
         return false;
     }
 

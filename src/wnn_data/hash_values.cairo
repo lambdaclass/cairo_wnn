@@ -30,7 +30,7 @@ impl HashValueTraitImpl of HashValueTrait {
     }
 
     fn validate_bit_decomposition(self: @HashValue) -> bool {
-        //ToDo check if the hash length
+        //ToDo check the hash length
         let x = *self.decomposition.msb * 1024_felt252 + *self.decomposition.index2;
         let x = x * 1024_felt252 + *self.decomposition.index1;
         return x == *self.hash;

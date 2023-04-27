@@ -3,6 +3,8 @@ use cairo_wnn::wnn_data::bloom_filters::load_bloom_filters;
 use cairo_wnn::wnn_data::hash_values::load_hash_values;
 use cairo_wnn::wnn_data::hash_values::HashValue;
 use cairo_wnn::wnn_data::input::load_input;
+use cairo_wnn::wnn_data::lookup_table::load_lookup_table;
+use cairo_wnn::wnn_data::lookup_table::LookupTable;
 use array::ArrayTrait;
 use traits::TryInto;
 use traits::Into;
@@ -32,4 +34,9 @@ fn test_load_hash_values() {
     let values: Array<HashValue> = load_hash_values();
     let length: u32 = values.len();
     assert(length == 56_u32, 'incorrect length of hash values');
+}
+
+#[test]
+fn test_load_lookup_table() {
+    let lookup_table: LookupTable = load_lookup_table();
 }
