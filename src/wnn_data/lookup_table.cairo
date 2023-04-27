@@ -1,4 +1,5 @@
 use array::ArrayTrait;
+use cairo_wnn::extended_lib::shift_array_to_bits;
 
 #[derive(Copy, Drop)]
 struct BloomFilter {
@@ -12,6 +13,25 @@ struct BloomFilter {
     value_7: u128,
 }
 
+trait BloomFilterTrait {
+    fn as_list(self: @BloomFilter) -> Array<u128>;
+}
+
+impl BloomFilterImpl of BloomFilterTrait {
+    fn as_list(self: @BloomFilter) -> Array<u128> {
+        let mut values = ArrayTrait::<u128>::new();
+        values.append(*self.value_0);
+        values.append(*self.value_1);
+        values.append(*self.value_2);
+        values.append(*self.value_3);
+        values.append(*self.value_4);
+        values.append(*self.value_5);
+        values.append(*self.value_6);
+        values.append(*self.value_7);
+        let filter_list: Array<u128> = shift_array_to_bits(ref values);
+        filter_list
+    }
+}
 
 #[derive(Copy, Drop)]
 struct Discriminator {
@@ -74,7 +94,6 @@ struct Discriminator {
 }
 
 
-
 #[derive(Drop)]
 struct LookupTable {
     discriminator_0: Discriminator,
@@ -88,7 +107,6 @@ struct LookupTable {
     discriminator_8: Discriminator,
     discriminator_9: Discriminator,
 }
-
 
 
 fn load_lookup_table() -> LookupTable {

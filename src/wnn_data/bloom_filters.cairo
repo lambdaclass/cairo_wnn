@@ -36,6 +36,7 @@ impl DiscriminatorsTraitImpl of DiscriminatorsTrait {
                 }
                 counter_input += 1;
             };
+            // ToDo This is incorrect
             if sum > max {
                 max = sum;
                 sum = 0;
