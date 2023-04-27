@@ -1,7 +1,7 @@
 use array::ArrayTrait;
 
-#[derive(Drop)]
-struct Entry {
+#[derive(Copy, Drop)]
+struct BloomFilter {
     value_0: u128,
     value_1: u128,
     value_2: u128,
@@ -11,7 +11,7 @@ struct Entry {
     value_6: u128,
     value_7: u128,
 }
-#[derive(Drop)]
+#[derive(Copy, Drop)]
 struct Discriminator {
     bloom_filter_0: Entry,
     bloom_filter_1: Entry,
