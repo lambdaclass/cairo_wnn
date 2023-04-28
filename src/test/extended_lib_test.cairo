@@ -92,150 +92,7 @@ fn test_reverse_array(){
     assert(*a_reverse[6_u32] == 1_u8, 'array[6] should be 1');
 }
 
-// #[test]
-// #[available_gas(20000000000)]
-// fn test_u128_to_bits() {
-//     let mut num = 446539134253285528697935237820190784_u128;
-//     let mut bits: Array<u128> = ArrayTrait::<u128>::new();
-//     extended_lib::shift_u128_to_bits(ref num, ref bits);
-//     print_array(@bits);
-//     assert(bits.len() == 128, 'bits length should be 128');
-//     let mut expected_bit_array: Array<u128> = ArrayTrait::<u128>::new();
 
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(1_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-//     expected_bit_array.append(0_u128);
-
-//     assert(expected_bit_array.len() == 128, 'expected_bit_array.len() == 128');
-
-//     let result: bool = extended_lib::check_array_equality(@expected_bit_array, @bits);
-//     assert(result, 'the arrays are not equal');
-// }
 
 #[test]
 #[available_gas(20000000000)]
@@ -375,4 +232,12 @@ fn test_u128_to_bits2() {
     assert(*bits[125] == 0_u128, 'bits[125] == 0_u128');
     assert(*bits[126] == 0_u128, 'bits[126] == 0_u128');
     assert(*bits[127] == 0_u128, 'bits[127] == 0_u128');
+}
+
+#[test]
+#[available_gas(20000000000)]
+fn test_u128_to_bits_3(){
+    let mut num = 8_u128;
+    let mut bits: Array<u128> = ArrayTrait::<u128>::new();
+    extended_lib::shift_u128_to_bits(ref num, ref bits);
 }

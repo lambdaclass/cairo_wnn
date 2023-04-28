@@ -50,11 +50,7 @@ fn shift_u128_to_bits(ref num: u128, ref vec_bits: Array<u128>) {
             break ();
         }
         let _bit = (num / div) & 1_u128;
-        // Todo make this something not as horrible as this!
-        // let bit: u8 =
-            // _bit.try_into().unwrap().try_into().unwrap().try_into().unwrap().try_into().unwrap();
         vec_bits.append(_bit);
-        num = (num % div) * 2_u128;
         div = div / 2_u128;
         i += 1;
     };
