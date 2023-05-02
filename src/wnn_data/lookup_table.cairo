@@ -1,5 +1,11 @@
 use array::ArrayTrait;
 use cairo_wnn::extended_lib::shift_array_to_bits;
+use traits::TryInto;
+use traits::Into;
+use core::option::OptionTrait;
+use cairo_wnn::wnn_data::hash_values::HashValue;
+use debug::PrintTrait;
+
 
 #[derive(Copy, Drop)]
 struct BloomFilter {
@@ -15,6 +21,7 @@ struct BloomFilter {
 
 trait BloomFilterTrait {
     fn as_list(self: @BloomFilter) -> Array<u128>;
+    fn contains(self: @BloomFilter, index1: u32, index2: u32) -> u128;
 }
 
 impl BloomFilterImpl of BloomFilterTrait {
@@ -30,6 +37,14 @@ impl BloomFilterImpl of BloomFilterTrait {
         values.append(*self.value_7);
         let filter_list: Array<u128> = shift_array_to_bits(ref values);
         filter_list
+    }
+
+    fn contains(self: @BloomFilter, index1: u32, index2: u32) -> u128 {
+        let bits: Array<u128> = self.as_list();
+        let bit1 = *bits[index1];
+        let bit2 = *bits[index2];
+        let result = bit1 & bit2;
+        result
     }
 }
 
@@ -93,6 +108,242 @@ struct Discriminator {
     bloom_filter_55: BloomFilter,
 }
 
+trait DiscriminatorTrait {
+    fn outcome_value(self: @Discriminator, hash_values: @Array<HashValue>) -> u128;
+}
+
+impl DiscriminatorTraitImpl of DiscriminatorTrait {
+    fn outcome_value(self: @Discriminator, hash_values: @Array<HashValue>) -> u128 {
+        let mut value = 0_u128;
+
+        let index1 = *hash_values[0].decomposition.index1;
+        let index2 = *hash_values[0].decomposition.index2;
+        value += self.bloom_filter_0.contains(index1, index2);
+
+        let index1 = *hash_values[1].decomposition.index1;
+        let index2 = *hash_values[1].decomposition.index2;
+        value += self.bloom_filter_1.contains(index1, index2);
+
+        let index1 = *hash_values[2].decomposition.index1;
+        let index2 = *hash_values[2].decomposition.index2;
+        value += self.bloom_filter_2.contains(index1, index2);
+
+        let index1 = *hash_values[3].decomposition.index1;
+        let index2 = *hash_values[3].decomposition.index2;
+        value += self.bloom_filter_3.contains(index1, index2);
+
+        let index1 = *hash_values[4].decomposition.index1;
+        let index2 = *hash_values[4].decomposition.index2;
+        value += self.bloom_filter_4.contains(index1, index2);
+
+        let index1 = *hash_values[5].decomposition.index1;
+        let index2 = *hash_values[5].decomposition.index2;
+        value += self.bloom_filter_5.contains(index1, index2);
+
+        let index1 = *hash_values[6].decomposition.index1;
+        let index2 = *hash_values[6].decomposition.index2;
+        value += self.bloom_filter_6.contains(index1, index2);
+
+        let index1 = *hash_values[7].decomposition.index1;
+        let index2 = *hash_values[7].decomposition.index2;
+        value += self.bloom_filter_7.contains(index1, index2);
+
+        let index1 = *hash_values[8].decomposition.index1;
+        let index2 = *hash_values[8].decomposition.index2;
+        value += self.bloom_filter_8.contains(index1, index2);
+
+        let index1 = *hash_values[9].decomposition.index1;
+        let index2 = *hash_values[9].decomposition.index2;
+        value += self.bloom_filter_9.contains(index1, index2);
+
+        let index1 = *hash_values[10].decomposition.index1;
+        let index2 = *hash_values[10].decomposition.index2;
+        value += self.bloom_filter_10.contains(index1, index2);
+
+        let index1 = *hash_values[11].decomposition.index1;
+        let index2 = *hash_values[11].decomposition.index2;
+        value += self.bloom_filter_11.contains(index1, index2);
+
+        let index1 = *hash_values[12].decomposition.index1;
+        let index2 = *hash_values[12].decomposition.index2;
+        value += self.bloom_filter_12.contains(index1, index2);
+
+        let index1 = *hash_values[13].decomposition.index1;
+        let index2 = *hash_values[13].decomposition.index2;
+        value += self.bloom_filter_13.contains(index1, index2);
+
+        let index1 = *hash_values[14].decomposition.index1;
+        let index2 = *hash_values[14].decomposition.index2;
+        value += self.bloom_filter_14.contains(index1, index2);
+
+        let index1 = *hash_values[15].decomposition.index1;
+        let index2 = *hash_values[15].decomposition.index2;
+        value += self.bloom_filter_15.contains(index1, index2);
+
+        let index1 = *hash_values[16].decomposition.index1;
+        let index2 = *hash_values[16].decomposition.index2;
+        value += self.bloom_filter_16.contains(index1, index2);
+
+        let index1 = *hash_values[17].decomposition.index1;
+        let index2 = *hash_values[17].decomposition.index2;
+        value += self.bloom_filter_17.contains(index1, index2);
+
+        let index1 = *hash_values[18].decomposition.index1;
+        let index2 = *hash_values[18].decomposition.index2;
+        value += self.bloom_filter_18.contains(index1, index2);
+
+        let index1 = *hash_values[19].decomposition.index1;
+        let index2 = *hash_values[19].decomposition.index2;
+        value += self.bloom_filter_19.contains(index1, index2);
+
+        let index1 = *hash_values[20].decomposition.index1;
+        let index2 = *hash_values[20].decomposition.index2;
+        value += self.bloom_filter_20.contains(index1, index2);
+
+        let index1 = *hash_values[21].decomposition.index1;
+        let index2 = *hash_values[21].decomposition.index2;
+        value += self.bloom_filter_21.contains(index1, index2);
+
+        let index1 = *hash_values[22].decomposition.index1;
+        let index2 = *hash_values[22].decomposition.index2;
+        value += self.bloom_filter_22.contains(index1, index2);
+
+        let index1 = *hash_values[23].decomposition.index1;
+        let index2 = *hash_values[23].decomposition.index2;
+        value += self.bloom_filter_23.contains(index1, index2);
+
+        let index1 = *hash_values[24].decomposition.index1;
+        let index2 = *hash_values[24].decomposition.index2;
+        value += self.bloom_filter_24.contains(index1, index2);
+
+        let index1 = *hash_values[25].decomposition.index1;
+        let index2 = *hash_values[25].decomposition.index2;
+        value += self.bloom_filter_25.contains(index1, index2);
+
+        let index1 = *hash_values[26].decomposition.index1;
+        let index2 = *hash_values[26].decomposition.index2;
+        value += self.bloom_filter_26.contains(index1, index2);
+
+        let index1 = *hash_values[27].decomposition.index1;
+        let index2 = *hash_values[27].decomposition.index2;
+        value += self.bloom_filter_27.contains(index1, index2);
+
+        let index1 = *hash_values[28].decomposition.index1;
+        let index2 = *hash_values[28].decomposition.index2;
+        value += self.bloom_filter_28.contains(index1, index2);
+
+        let index1 = *hash_values[29].decomposition.index1;
+        let index2 = *hash_values[29].decomposition.index2;
+        value += self.bloom_filter_29.contains(index1, index2);
+
+        let index1 = *hash_values[30].decomposition.index1;
+        let index2 = *hash_values[30].decomposition.index2;
+        value += self.bloom_filter_30.contains(index1, index2);
+
+        let index1 = *hash_values[31].decomposition.index1;
+        let index2 = *hash_values[31].decomposition.index2;
+        value += self.bloom_filter_31.contains(index1, index2);
+
+        let index1 = *hash_values[32].decomposition.index1;
+        let index2 = *hash_values[32].decomposition.index2;
+        value += self.bloom_filter_32.contains(index1, index2);
+
+        let index1 = *hash_values[33].decomposition.index1;
+        let index2 = *hash_values[33].decomposition.index2;
+        value += self.bloom_filter_33.contains(index1, index2);
+
+        let index1 = *hash_values[34].decomposition.index1;
+        let index2 = *hash_values[34].decomposition.index2;
+        value += self.bloom_filter_34.contains(index1, index2);
+
+        let index1 = *hash_values[35].decomposition.index1;
+        let index2 = *hash_values[35].decomposition.index2;
+        value += self.bloom_filter_35.contains(index1, index2);
+
+        let index1 = *hash_values[36].decomposition.index1;
+        let index2 = *hash_values[36].decomposition.index2;
+        value += self.bloom_filter_36.contains(index1, index2);
+
+        let index1 = *hash_values[37].decomposition.index1;
+        let index2 = *hash_values[37].decomposition.index2;
+        value += self.bloom_filter_37.contains(index1, index2);
+
+        let index1 = *hash_values[38].decomposition.index1;
+        let index2 = *hash_values[38].decomposition.index2;
+        value += self.bloom_filter_38.contains(index1, index2);
+
+        let index1 = *hash_values[39].decomposition.index1;
+        let index2 = *hash_values[39].decomposition.index2;
+        value += self.bloom_filter_39.contains(index1, index2);
+
+        let index1 = *hash_values[40].decomposition.index1;
+        let index2 = *hash_values[40].decomposition.index2;
+        value += self.bloom_filter_40.contains(index1, index2);
+
+        let index1 = *hash_values[41].decomposition.index1;
+        let index2 = *hash_values[41].decomposition.index2;
+        value += self.bloom_filter_41.contains(index1, index2);
+
+        let index1 = *hash_values[42].decomposition.index1;
+        let index2 = *hash_values[42].decomposition.index2;
+        value += self.bloom_filter_42.contains(index1, index2);
+
+        let index1 = *hash_values[43].decomposition.index1;
+        let index2 = *hash_values[43].decomposition.index2;
+        value += self.bloom_filter_43.contains(index1, index2);
+
+        let index1 = *hash_values[44].decomposition.index1;
+        let index2 = *hash_values[44].decomposition.index2;
+        value += self.bloom_filter_44.contains(index1, index2);
+
+        let index1 = *hash_values[45].decomposition.index1;
+        let index2 = *hash_values[45].decomposition.index2;
+        value += self.bloom_filter_45.contains(index1, index2);
+
+        let index1 = *hash_values[46].decomposition.index1;
+        let index2 = *hash_values[46].decomposition.index2;
+        value += self.bloom_filter_46.contains(index1, index2);
+
+        let index1 = *hash_values[47].decomposition.index1;
+        let index2 = *hash_values[47].decomposition.index2;
+        value += self.bloom_filter_47.contains(index1, index2);
+
+        let index1 = *hash_values[48].decomposition.index1;
+        let index2 = *hash_values[48].decomposition.index2;
+        value += self.bloom_filter_48.contains(index1, index2);
+
+        let index1 = *hash_values[49].decomposition.index1;
+        let index2 = *hash_values[49].decomposition.index2;
+        value += self.bloom_filter_49.contains(index1, index2);
+
+        let index1 = *hash_values[50].decomposition.index1;
+        let index2 = *hash_values[50].decomposition.index2;
+        value += self.bloom_filter_50.contains(index1, index2);
+
+        let index1 = *hash_values[51].decomposition.index1;
+        let index2 = *hash_values[51].decomposition.index2;
+        value += self.bloom_filter_51.contains(index1, index2);
+
+        let index1 = *hash_values[52].decomposition.index1;
+        let index2 = *hash_values[52].decomposition.index2;
+        value += self.bloom_filter_52.contains(index1, index2);
+
+        let index1 = *hash_values[53].decomposition.index1;
+        let index2 = *hash_values[53].decomposition.index2;
+        value += self.bloom_filter_53.contains(index1, index2);
+
+        let index1 = *hash_values[54].decomposition.index1;
+        let index2 = *hash_values[54].decomposition.index2;
+        value += self.bloom_filter_54.contains(index1, index2);
+
+        let index1 = *hash_values[55].decomposition.index1;
+        let index2 = *hash_values[55].decomposition.index2;
+        value += self.bloom_filter_55.contains(index1, index2);
+
+        value
+    }
+}
+
 
 #[derive(Drop)]
 struct LookupTable {
@@ -106,6 +357,89 @@ struct LookupTable {
     discriminator_7: Discriminator,
     discriminator_8: Discriminator,
     discriminator_9: Discriminator,
+}
+
+trait LookupTableTrait {
+    fn arg_max(self: @LookupTable, hash_values: @Array<HashValue>) -> u128;
+}
+
+impl LookupTableTraitImpl of LookupTableTrait {
+    fn arg_max(self: @LookupTable, hash_values: @Array<HashValue>) -> u128 {
+        let mut max = 0_u128;
+        let mut max_index = 0_u128;
+
+        let mut value = self.discriminator_0.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 0;
+        }
+
+        value = self.discriminator_1.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 1;
+        }
+
+        value = self.discriminator_2.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 2;
+        }
+
+        value = self.discriminator_3.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 3;
+        }
+
+        value = self.discriminator_4.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 4;
+        }
+
+        value = self.discriminator_5.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 5;
+        }
+
+        value = self.discriminator_6.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 6;
+        }
+
+        value = self.discriminator_7.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 7;
+        }
+
+        value = self.discriminator_8.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 8;
+        }
+
+        value = self.discriminator_9.outcome_value(hash_values);
+        value.print();
+        if value > max {
+            max = value;
+            max_index = 9;
+        }
+
+        max_index + 1
+    }
 }
 
 

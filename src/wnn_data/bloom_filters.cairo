@@ -1,50 +1,6 @@
 use array::ArrayTrait;
-
-#[derive(Drop)]
-struct Discriminators {
-    amount_layers: u32,
-    amount_bits: u32,
-    bloom_filters: Array<BloomFilter>,
-}
-
-trait DiscriminatorsTrait {
-    // Returns the discriminator class
-    fn predict(self: @Discriminators, input: @Array<u64>) -> u32;
-}
-
-impl DiscriminatorsTraitImpl of DiscriminatorsTrait {
-    // Predicting consist of iterating each discriminator and checking the membership of the input and then summing all the values
-    fn predict(self: @Discriminators, input: @Array<u64>) -> u32 {
-        let mut counter_input: u32 = 0;
-        let mut counter_discriminator: u32 = 0;
-        let mut sum: u64 = 0;
-        let mut max: u64 = 0;
-
-        loop {
-            if counter_discriminator == *self.amount_layers {
-                break counter_discriminator;
-            }
-            let discriminator = self.bloom_filters[counter_discriminator];
-            loop {
-                if counter_input == self.bloom_filters.len() {
-                    break sum;
-                }
-                let bloom_filter = discriminator;
-                let membership = bloom_filter.check_membership(*input[counter_input]);
-                if membership {
-                    sum += 1;
-                }
-                counter_input += 1;
-            };
-            // ToDo This is incorrect
-            if sum > max {
-                max = sum;
-                sum = 0;
-            }
-            counter_discriminator += 1;
-        }
-    }
-}
+use debug::PrintTrait;
+use traits::Into;
 
 #[derive(Drop)]
 struct BloomFilter {
@@ -70,7 +26,114 @@ impl BloomFilterTraitImpl of BloomFilterTrait {
     }
 }
 
-fn load_bloom_filters() -> Discriminators {
+fn _arg_max(bloom_filter: @Array<u64>) -> Array<u64> {
+    let mut i: u32 = 0;
+    let mut max: u64 = 0;
+    let mut to_return: Array<u64> = ArrayTrait::new();
+    loop {
+        if i == bloom_filter.len() / 2_u32 {
+            break max;
+        }
+        let op = *bloom_filter[i] * *bloom_filter[i + 10];
+        to_return.append(op);
+        i += 1;
+    };
+    assert(to_return.len() == 10_u32, 'to_return.len() == 10_u32');
+    to_return
+}
+
+fn arg_max(bloom_filters: Array<BloomFilter>) -> (felt252, felt252) {
+    let mut discriminator0: u64 = 0;
+    let mut discriminator1: u64 = 0;
+    let mut discriminator2: u64 = 0;
+    let mut discriminator3: u64 = 0;
+    let mut discriminator4: u64 = 0;
+    let mut discriminator5: u64 = 0;
+    let mut discriminator6: u64 = 0;
+    let mut discriminator7: u64 = 0;
+    let mut discriminator8: u64 = 0;
+    let mut discriminator9: u64 = 0;
+
+    let mut i: u32 = 0;
+    assert(bloom_filters.len() == 56_u32, 'bloom_filters.len() == 56_u32');
+    loop {
+        if i == bloom_filters.len() {
+            break ();
+        }
+        let bloom_filter = bloom_filters[i].filters;
+        let values = _arg_max(bloom_filter);
+        discriminator0 += *values[0];
+        discriminator1 += *values[1];
+        discriminator2 += *values[2];
+        discriminator3 += *values[3];
+        discriminator4 += *values[4];
+        discriminator5 += *values[5];
+        discriminator6 += *values[6];
+        discriminator7 += *values[7];
+        discriminator8 += *values[8];
+        discriminator9 += *values[9];
+        i += 1;
+    };
+
+    //find the max value
+    let mut max: u64 = 0;
+    let mut max_index: u32 = 0;
+
+    if discriminator0 > max {
+        max = discriminator0;
+        max_index = 0;
+    }
+
+    if discriminator1 > max {
+        max = discriminator1;
+        max_index = 1;
+    }
+
+    if discriminator2 > max {
+        max = discriminator2;
+        max_index = 2;
+    }
+
+    if discriminator3 > max {
+        max = discriminator3;
+        max_index = 3;
+    }
+
+    if discriminator4 > max {
+        max = discriminator4;
+        max_index = 4;
+    }
+
+    if discriminator5 > max {
+        max = discriminator5;
+        max_index = 5;
+    }
+
+    if discriminator6 > max {
+        max = discriminator6;
+        max_index = 6;
+    }
+
+    if discriminator7 > max {
+        max = discriminator7;
+        max_index = 7;
+    }
+
+    if discriminator8 > max {
+        max = discriminator8;
+        max_index = 8;
+    }
+
+    if discriminator9 > max {
+        max = discriminator9;
+        max_index = 9;
+    }
+
+    max_index = max_index;
+    (max_index.into(), max.into())
+}
+
+fn load_bloom_filters() -> Array<BloomFilter> {
     let mut bloom_filters: Array<BloomFilter> = ArrayTrait::new();
     let mut input0 = ArrayTrait::new();
     input0.append(0_u64);
@@ -1359,5 +1422,5 @@ fn load_bloom_filters() -> Discriminators {
     input55.append(1_u64);
     input55.append(1_u64);
     bloom_filters.append(BloomFilter { filters: input55,  });
-    Discriminators { amount_layers: 56, amount_bits: 20, bloom_filters: bloom_filters,  }
+    bloom_filters
 }

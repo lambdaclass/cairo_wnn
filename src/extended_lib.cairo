@@ -19,14 +19,20 @@ impl TDrop: Drop<T>>(
     _check_array_equality(a, b, i + 1_u32)
 }
 
-fn reverse_array<T, impl TPartialEq: PartialEq<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>, impl TPrintTrait: PrintTrait<T>>(arr: @Array<T>) -> Array<T> {
+fn reverse_array<T,
+impl TPartialEq: PartialEq<T>,
+impl TCopy: Copy<T>,
+impl TDrop: Drop<T>,
+impl TPrintTrait: PrintTrait<T>>(
+    arr: @Array<T>
+) -> Array<T> {
     let mut new_arr = ArrayTrait::<T>::new();
     let mut i = arr.len();
     loop {
         if i == 0_u32 {
             break ();
         }
-        new_arr.append(*arr[i-1]);
+        new_arr.append(*arr[i - 1]);
         i -= 1_u32;
     };
     new_arr
